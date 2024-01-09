@@ -9,18 +9,15 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     private UserRepository userrepository;
-    public String addUser(User user){
-       if(userrepository.save(user)!= null)
-           return "User added successfully";
-       return "User was not created";
+    public User addUser(User user){
+       return userrepository.save(user);
     }
-    public String updateUser(Integer id,User user){
+    public User updateUser(Integer id,User user){
         if(userrepository.existsById(id)){
             user.setId(id);
-            userrepository.save(user) ;
-            return "User updated Successfully";
+            return userrepository.save(user) ;
         }
-        return "Something Wrong";
+        return null;
     }
     public User viewUser(Integer id){
         return userrepository.getById(id);

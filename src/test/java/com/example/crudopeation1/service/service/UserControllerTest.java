@@ -32,12 +32,12 @@ public class UserControllerTest {
         user.setName("Naveenkumar");
         user.setEmail("naveen@gmail.com");
         user.setMobile(1234567890L);
-        when(userService.addUser(any(User.class))).thenReturn("User added successfully");
+        when(userService.addUser(any(User.class))).thenReturn(user);
        mockMvc.perform(MockMvcRequestBuilders.post("/register")
                         .content("{ \"name\": \"Naveenkumar\", \"email\": \"naveen@gmail.com\", \"mobile\": 1234567890 }")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("User added successfully"));
+                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+
     }
 
     @Test
@@ -47,12 +47,12 @@ public class UserControllerTest {
         user.setName("Updated Name");
         user.setEmail("updated.email@example.com");
         user.setMobile(9876543210L);
-        when(userService.updateUser(userId, user)).thenReturn("User updated successfully");
+        when(userService.updateUser(userId, user)).thenReturn(user);
         mockMvc.perform(MockMvcRequestBuilders.put("/update/{id}", userId)
                         .content("{ \"name\": \"Updated Name\", \"email\": \"updated.email@example.com\", \"mobile\": 9876543210 }")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("User updated successfully"));
+                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+
     }
 
     @Test

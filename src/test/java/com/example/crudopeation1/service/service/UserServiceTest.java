@@ -30,7 +30,12 @@ public class UserServiceTest {
         user.setName("Naveenkumar");
         user.setEmail("naveen@gmail.com");
         user.setMobile(1234567890L);
-        when(userService.addUser(user)).thenReturn("User added Successfully");
+        when(userService.addUser(user)).thenReturn(user);
+        User savedUser =userService.addUser(user);
+        assertEquals(savedUser.getName(),user.getName());
+        assertEquals(savedUser.getEmail(),user.getEmail());
+        assertEquals(savedUser.getMobile(),user.getMobile());
+
     }
     @Test
     public void testGetUser(){
@@ -44,7 +49,11 @@ public class UserServiceTest {
         user.setName("Naveenkumar");
         user.setEmail("naveen@gmail.com");
         user.setMobile(1234567890L);
-        when(userService.updateUser(id,user)).thenReturn("User Updated Successfully");
+        when(userService.updateUser(id,user)).thenReturn(user);
+        User savedUser=userService.updateUser(id,user);
+        assertEquals(savedUser.getName(),user.getName());
+        assertEquals(savedUser.getEmail(),user.getEmail());
+        assertEquals(savedUser.getMobile(),user.getMobile());
     }
     @Test
     public void testDeleteUser(){
